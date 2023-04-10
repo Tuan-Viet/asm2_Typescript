@@ -1,5 +1,22 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$bERQX4RMi.0tELPuVMX7ouwFCMABtLfOeGSk1BSk2veHlu69yMQ4G",
+      "role": "admin",
+      "confirmPassword": "123456",
+      "name": "admin",
+      "id": 4
+    },
+    {
+      "email": "vietlt226688@gmail.com",
+      "password": "$2a$10$O3buMxLLaQRrmWZAEFWByev2qzwCvdS9GeNdMY0WTG.zYc/eFj/vK",
+      "role": "member",
+      "confirmPassword": "123456",
+      "name": "Lê Tuấn Việt",
+      "id": 5
+    }
+  ],
   "products": [
     {
       "id": 1,

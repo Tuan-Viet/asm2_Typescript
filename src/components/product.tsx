@@ -6,10 +6,11 @@ type ProductProp = {
 }
 
 const Product = ({ data }: ProductProp) => {
+
     return <Link to={`/product/${data.id}`} className="block h-[303px] relative">
         <img
             alt="Art"
-            src={data?.images[0].base_url}
+            src={data?.images}
             className="w-full object-cover"
         />
 
@@ -19,7 +20,9 @@ const Product = ({ data }: ProductProp) => {
             </h3>
 
             <p className="mt-2 text-[14px] flex">
-                <p className="text-[#D70018] text-[14px] font-semibold">{data.original_price.toLocaleString()} ₫<span className="text-gray-700 opacity-50 ml-2 text-[13px]">{data.price.toLocaleString()} ₫</span></p>
+                <p className="text-[#D70018] text-[14px] font-semibold">{data.original_price && typeof data.original_price !== 'undefined' && (
+                    <p className="text-[#D70018] text-[14px] font-semibold">{data.original_price.toLocaleString()}<span className="text-gray-700 opacity-50 ml-2 text-[13px]">{data.price.toLocaleString()} ₫</span></p>
+                )} ₫<span className="text-gray-700 opacity-50 ml-2 text-[13px]">{data.price.toLocaleString()} ₫</span></p>
             </p>
             <p className="mt-2 text-[12px] flex w-full">
                 <p className="flex">

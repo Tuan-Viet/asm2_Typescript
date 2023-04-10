@@ -91,9 +91,10 @@ const ProductDetail = (props: any) => {
                     </div>
                     <div className="mt-auto flex">
                         <button className="bg-[#FF3945]  text-[#FFFFFF] w-[240px] h-12 rounded-md hover:bg-white hover:border-[#FF3945] hover:text-[#FF3945] hover:border-2 ease-linear transition-all"><a href="/gio-hang">Mua ngay</a></button>
-                        <div className="w-12 h-12 border-[#FF3945] border-2 ml-5 rounded-md flex justify-center items-center cursor-pointer hover:bg-[#FF3945] group  hover:text-[#FFF]">
-                            <a href="/cart">
-                                <i className="fas fa-basket-shopping-simple"></i>
+                        <div className="w-12 h-12 border-[#FF3945] border-2 ml-5 rounded-md flex justify-center items-center cursor-pointer hover:bg-[#FF3945] group text-[#FF3945] hover:text-[#FFF] ">
+                            <a href="/cart" >
+                                {/* <i className="fa-solid fa-basket-shopping-simple"></i> */}
+                                <i className="fa-solid fa-cart-shopping " ></i>
                             </a>
                         </div>
                         {/* <Link to={'/cart'} className="block">

@@ -1,52 +1,89 @@
-const logup = () => {
+import { useForm } from 'react-hook-form';
+import { signinSchema, signupSchema } from '../schemas/auth';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { signup_user } from '../api/auth';
+import { useNavigate } from 'react-router-dom';
+
+const signup = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm<signupSchema>({
+        resolver: yupResolver(signupSchema)
+    });
+    const navigate = useNavigate()
+    const onSubmit = async (data: signupSchema) => {
+
+        try {
+            const response = await signup_user(data);
+            console.log(response);
+            navigate('/signin')
+
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg">
+            <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg w-[500px]">
                 <div className="flex justify-center justify-items-center my-4 " >
                     <img className="w-[70px] " src="../../public/img/logo.png" alt="" />
                 </div>
                 <h3 className="text-3xl font-bold text-center text-[#D70018] ">
                     Sign Up
                 </h3>
-                <form action="">
+                <form action="#" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mt-4">
+
                         <div>
-                            <label className="block font-semibold" htmlFor="email">
+                            <label className="mt-2 block font-semibold" >
+                                Name
+                            </label>
+                            <input
+                                {...register('name')}
+                                className="w-full px-3 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#D70018]"
+                            />
+                            <span className="text-xs tracking-wide text-red-600 font-semibold">
+                                {errors.name && errors.name.message}
+
+                            </span>
+                        </div>
+                        <div>
+                            <label className=" mt-2 block font-semibold" htmlFor="email">
                                 Email
                             </label>
                             <input
-                                type="text"
-                                placeholder="Email"
-                                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#D70018]"
+                                {...register('email')}
+                                className="w-full px-3 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#D70018]"
                             />
                             <span className="text-xs tracking-wide text-red-600 font-semibold">
-                                Email field is required
+                                {errors.email && errors.email.message}
+
                             </span>
                         </div>
-                        <div className="mt-4 font-semibold">
+                        <div className="mt-2 font-semibold">
                             <label className="block" htmlFor="password">
                                 Password
                             </label>
                             <input
                                 type="password"
-                                placeholder="Password"
-                                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#D70018]"
+                                {...register('password')}
+                                className="w-full px-3 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#D70018]"
                             />
                             <span className="text-xs tracking-wide text-red-600 font-semibold">
-                                Password field is required
+                                {errors.password && errors.password.message}
+
                             </span>
                         </div>
-                        <div className="mt-4">
+                        <div className="mt-2 font-semibold">
                             <label className="block font-semibold" htmlFor="password">
                                 Confirm password
                             </label>
                             <input
                                 type="password"
-                                placeholder="Password"
-                                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#D70018]"
+                                {...register('confirmPassword')}
+                                className="w-full px-3 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#D70018]"
                             />
                             <span className="text-xs tracking-wide text-red-600 font-semibold">
-                                Confirm password field is required
+                                {errors.confirmPassword && errors.confirmPassword.message}
                             </span>
                         </div>
                         <div className="flex items-baseline justify-center">
@@ -55,7 +92,7 @@ const logup = () => {
                         </div>
                         <div className="text-center mt-4">
                             <div className="">
-                                Already a member? <a href="/login" className="text-[#5855ff]">Log in</a>
+                                Already a member? <a href="/signin" className="text-[#5855ff]">Log in</a>
                             </div>
                         </div>
                     </div>
@@ -65,4 +102,4 @@ const logup = () => {
     )
 }
 
-export default logup;
+export default signup;

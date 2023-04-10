@@ -1,36 +1,66 @@
-import { Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { formSignup } from '../../models'
 
 const UserLayout = () => {
+    const [user, setUser] = useState<formSignup>({} as formSignup)
+    console.log(user.userName);
+
+
+    const navigate = useNavigate()
+    const logout = () => {
+        localStorage.clear()
+        navigate('/')
+    }
+
+    useEffect(() => {
+        const getData = localStorage.getItem("user")
+        if (getData) {
+            const dataObject = JSON.parse(getData)
+            setUser(dataObject)
+        }
+    }, [])
     return <>
         {/* Header */}
-        <header className='bg-[#D70018] h-[64px] container mx-auto flex flex-row items-center justify-center'>
-            <div className="logo">
-                <img className='w-[65px] mx-auto ' src="../../public/img/logo.png" alt="" />
-            </div>
-            <div className="search">
-                <form className=" px-4 ">
-                    <div className="relative">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        <header className='bg-[#D70018]'>
+            <div className="container flex flex-row items-center justify-center  h-[64px]  ">
+                <div className="logo">
+                    <img className='w-[65px] mx-auto ' src="../../public/img/logo.png" alt="" />
+                </div>
+                <div className="search">
+                    <form className=" px-4 ">
+                        <div className="relative">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
+                            </svg>
+                            <input
+                                type="text"
+                                placeholder="Search"
+                                className=" py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600 h-[34px] w-[600px]"
                             />
-                        </svg>
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className=" py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600 h-[34px] w-[600px]"
-                        />
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
+                <div className="">
+                    {user.userName ? <div className='text-[#ffffff] ml-[700px] flex items-center'>
+                        <button className='' onClick={() => logout()}><span className="flex-1  whitespace-nowrap">Log out </span>
+                        </button></div>
+                        : <Link to="/signin" className=''> <span className="flex-1  whitespace-nowrap text-[#ffffff] ml-[700px]">Login </span>
+                        </Link>}
+
+                </div>
             </div>
         </header>
         {/* Content */}
