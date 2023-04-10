@@ -31,7 +31,7 @@ const Dashboard = () => {
 
 
             <div className="mx-1 mb-3 text-end">
-                <button className=" bg-blue-500 text-white rounded-md p-2 mx-10"><Link to="/admin/add">ADD+</Link></button>
+                <button className=" bg-blue-500 text-white rounded-md p-2 mx-10"><Link to="/admin/product/add">ADD+</Link></button>
             </div>
 
             <div className="overflow-x-auto rounded-lg border border-gray-200">
@@ -91,8 +91,8 @@ const Dashboard = () => {
                                 </td>
                                 <td className="text-center">
 
-                                    <a href="/admin/"><button onClick={() => removeProduct(product._id)} className="bg-red-500 text-white rounded-md p-2 mx-1">Delete</button></a>
-                                    <button className="bg-green-500 text-white rounded-md p-2 mx-1"><Link to={`/admin/products/${product._id}`}>Edit</Link></button>
+                                    <Link to="/admin/"><button onClick={() => removeProduct(product._id)} className="bg-red-500 text-white rounded-md p-2 mx-1">Delete</button></Link>
+                                    <Link to={`product/edit/${product._id}`}><button className="bg-green-500 text-white rounded-md p-2 mx-1">Edit</button></Link>
                                 </td>
                             </tr>
                         ))}

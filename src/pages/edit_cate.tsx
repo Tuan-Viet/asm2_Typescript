@@ -3,22 +3,45 @@ import { ICategory, IProduct, IUser, addCategorySchema, addProductSchema, formAd
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { addProduct } from "../api/product"
-import { useNavigate } from "react-router-dom"
-import { addCategory, getCategory } from "../api/Category"
+import { useNavigate, useParams } from "react-router-dom"
+import { addCategory, getCategory, getOneCategory, updateCategory } from "../api/Category"
 import axios from "axios"
-const CategoryAdd = () => {
+
+const CategoryEdit = () => {
+    const [category, setCategory] = useState<ICategory>({} as ICategory)
+    const { id } = useParams()
     const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm<ICategory>({
-        resolver: yupResolver(addCategorySchema)
+        resolver: yupResolver(addCategorySchema),
+        defaultValues: async () => {
+            if (id) {
+                return await fetchOneCategory(id)
+            }
+        }
     })
     const onSubmitForm = async (category: ICategory) => {
-        await addCategory(category);
+
+        try {
+            if (id) {
+                await updateCategory(id, category)
+                navigate("/admin/category")
+            }
+        } catch (error) {
+            console.log(error);
+        }
         navigate("/admin/category")
 
+    }
+    const fetchOneCategory = async (id: string) => {
+        if (id) {
+            const { data: { category } } = await getOneCategory(id)
+            setCategory(category)
+            return category
+        }
     }
     useEffect(() => {
     }, [])
@@ -56,4 +79,4 @@ const CategoryAdd = () => {
     </form >
 }
 
-export default CategoryAdd
+export default CategoryEdit

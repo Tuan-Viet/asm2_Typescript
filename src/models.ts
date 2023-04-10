@@ -57,10 +57,10 @@ export type formSigin = Yup.InferType<typeof signinSchema>
 // updateProduct
 export const addProductSchema = Yup.object({
     name: Yup.string().required("Trường dữ liệu bắt buộc"),
-    price: Yup.number().min(0).required("Trường dữ liệu bắt buộc"),
+    price: Yup.number().required("Trường dữ liệu bắt buộc"),
     images: Yup.string().required("Trường dữ liệu bắt buộc"),
-    original_price: Yup.number().min(0).required("Trường dữ liệu bắt buộc"),
-    // categoryId: Yup.string().required("Trường dữ liệu bắt buộc"),
+    original_price: Yup.number().required("Trường dữ liệu bắt buộc"),
+    categoryId: Yup.string().required("Trường dữ liệu bắt buộc"),
     description: Yup.string(),
     description_small: Yup.string().min(10, "Mô tả ngắn phải có 10 kí tự").max(200).required(),
     specifications: Yup.string().min(10, "Thông số kĩ thuật phải có 10 kí tự").max(200).required()
@@ -69,9 +69,9 @@ export type formAdd = Yup.InferType<typeof addProductSchema>
 
 export const updateSchema = Yup.object({
     name: Yup.string().required("Trường dữ liệu bắt buộc"),
-    price: Yup.number().min(0).required("Trường dữ liệu bắt buộc"),
-    original_price: Yup.number().min(0).required("Trường dữ liệu bắt buộc"),
-    // categoryId: Yup.string().required("Trường dữ liệu bắt buộc"),
+    price: Yup.number().required("Trường dữ liệu bắt buộc"),
+    original_price: Yup.number().required("Trường dữ liệu bắt buộc"),
+    categoryId: Yup.string().required("Trường dữ liệu bắt buộc"),
     description: Yup.string(),
     description_small: Yup.string().min(10, "Mô tả ngắn phải có 10 kí tự").max(200).required(),
     specifications: Yup.string().min(10, "Thông số kĩ thuật phải có 10 kí tự").max(200).required()

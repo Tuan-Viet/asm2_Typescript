@@ -36,8 +36,8 @@ export const productSchema = joi.object({
         "any.required": "Truong specifications bat buoc nhap",
         "string.min": "specifications phai lon hon hoac bang 1",
     }),
-    // categoryId: joi.string().min(10).required().messages({
-    //     "string.empty": "Trường dữ liệu bắt buộc",
-    //     "any.required": "Truong categoryId bat buoc nhap",
-    // })
+    categoryId: joi.string().min(10).required().messages({
+        "string.empty": "Trường dữ liệu bắt buộc",
+        "any.required": "Truong categoryId bat buoc nhap",
+    })
 })
